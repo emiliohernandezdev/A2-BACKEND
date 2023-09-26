@@ -32,6 +32,12 @@
 $ npm install
 ```
 
+## Conexión a base de datos
+
+```sql
+SELECT *  
+  FROM Cakes;
+
 ## Running the app
 
 ```bash
