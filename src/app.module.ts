@@ -5,6 +5,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CakeModule } from './modules/cake/cake.module';
 import { Cake } from './modules/cake/cake.entity';
+import { Order } from './modules/order/order.entity';
+import { OrderModule } from './modules/order/order.module';
 
 @Module({
   imports: [
@@ -22,7 +24,8 @@ import { Cake } from './modules/cake/cake.entity';
         username: cfg.get<string>("DB_USER"),
         password: cfg.get<string>("DB_PASS"),
         entities: [
-          Cake
+          Cake,
+          Order
         ],
         options: {
           encrypt: false,
@@ -31,7 +34,8 @@ import { Cake } from './modules/cake/cake.entity';
       }),
       inject: [ConfigService]
     }),
-    CakeModule
+    CakeModule,
+    OrderModule
   ],
   controllers: [AppController],
   providers: [AppService],
