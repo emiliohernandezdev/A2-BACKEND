@@ -17,16 +17,16 @@ import { Cake } from './modules/cake/cake.entity';
       imports: [ConfigModule],
       useFactory: async (cfg: ConfigService) => ({
         type: 'mssql',
-        host: `${cfg.get<string>('DB_SERVER')}\\${cfg.get<string>('DB_INSTANCE')}`,
-        port: 1433,
-        username: cfg.get<string>('DB_USER'),
-        password: cfg.get<string>('DB_PASS'),
-        database: 'ANALISIS2',
+        host: cfg.get<string>("DB_HOST"),
+        database: cfg.get<string>("DB_NAME"),
+        username: cfg.get<string>("DB_USER"),
+        password: cfg.get<string>("DB_PASS"),
         entities: [
           Cake
         ],
         options: {
           encrypt: false,
+          trustServerCertificate: true
         }
       }),
       inject: [ConfigService]
