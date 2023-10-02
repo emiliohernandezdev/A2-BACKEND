@@ -14,6 +14,11 @@ export class CakeService implements ICakeFactory{
     constructor(@InjectRepository(CakeEntity) 
     private readonly repo: Repository<CakeEntity>){}
 
+
+    async getCakes(){
+        return await this.repo.find({});
+    }
+
     createCake(type: CakeType, ingredients: string, procedure: string, price: number){
         const factory = this.getFactory(type);
         const cake = factory.createCake(type, ingredients, procedure, price);

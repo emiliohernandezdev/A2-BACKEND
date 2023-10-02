@@ -7,6 +7,8 @@ import { CakeModule } from './modules/cake/cake.module';
 import { Cake } from './modules/cake/cake.entity';
 import { Order } from './modules/order/order.entity';
 import { OrderModule } from './modules/order/order.module';
+import { FamilyModule } from './modules/family/family.module';
+import { CakefamilyModule } from './modules/cakefamily/cakefamily.module';
 
 @Module({
   imports: [
@@ -19,7 +21,8 @@ import { OrderModule } from './modules/order/order.module';
       imports: [ConfigModule],
       useFactory: async (cfg: ConfigService) => ({
         type: 'mssql',
-        host: cfg.get<string>("DB_HOST"),
+        host: "localhost",
+        port: 1433,
         database: cfg.get<string>("DB_NAME"),
         username: cfg.get<string>("DB_USER"),
         password: cfg.get<string>("DB_PASS"),
@@ -29,13 +32,17 @@ import { OrderModule } from './modules/order/order.module';
         ],
         options: {
           encrypt: false,
-          trustServerCertificate: true
+          trustServerCertificate: true,
+          useUTC: true,
+          instanceName: "DEVELOP"
         }
       }),
       inject: [ConfigService]
     }),
     CakeModule,
-    OrderModule
+    OrderModule,
+    FamilyModule,
+    CakefamilyModule
   ],
   controllers: [AppController],
   providers: [AppService],

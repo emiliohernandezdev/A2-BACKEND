@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from "@nestjs/common";
+import { Body, Controller, Post, Get } from '@nestjs/common';
 import { CakeService } from "./cake.service";
 import { CakeType } from "./enums/cake.enum";
 
@@ -6,6 +6,11 @@ import { CakeType } from "./enums/cake.enum";
 export class CakeController{
 
     constructor(private readonly service: CakeService){}
+
+    @Get('')
+    getCakes(){
+        return this.service.getCakes()
+    }
 
     @Post('create')
     createCake(@Body('type') type: CakeType,

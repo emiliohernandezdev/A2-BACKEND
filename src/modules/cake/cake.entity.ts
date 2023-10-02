@@ -6,11 +6,18 @@ export class Cake{
     id: number;
 
     @Column()
-    type: string;
+    name: string;
 
     @Column()
-    ingredients: string;
+    description: string;
 
-    @Column()
+    @Column({
+        type: 'decimal',
+        precision: 10,
+        scale: 2
+    })
     price: number;
+
+    @Column()
+    stock: number;
 }
